@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import { Animated, View, StyleSheet, Text } from 'react-native';
+import { Animated, View, StyleSheet, TouchableOpacity } from 'react-native';
 
-export default function OpacityScreen() {
 
-  const fadeAnimation = new Animated.Value(0)
+export default function OpacityScreen({ navigation }) {
+  const { goBack } = navigation;
+  const fadeAnimation = new Animated.Value(0);
 
   useEffect(() => {
     Animated.timing(fadeAnimation, {
@@ -18,8 +19,17 @@ export default function OpacityScreen() {
       <Animated.Text style={[styles.text, { opacity: fadeAnimation }]}>
         Hello, World!
       </Animated.Text>
+      <TouchableOpacity onPress={() => goBack()}>
+        <Animated.Text style={[styles.text, { opacity: fadeAnimation }]}>
+          Go back
+        </Animated.Text>
+      </TouchableOpacity>
     </View>
   );
+}
+
+OpacityScreen.navigationOptions = {
+  header: null,
 }
 
 const styles = StyleSheet.create({

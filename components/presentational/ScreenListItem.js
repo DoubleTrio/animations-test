@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import R from '../../styles/index';
 import { AntDesign } from '@expo/vector-icons';
 
 const ScreenListItem = ({ navigateToScreen, routeName, title, subText }) => {
+  console.log('listitem rendered')
   return (
     <TouchableOpacity style={styles.container} onPress={() => navigateToScreen(routeName)}>
       <View>
@@ -48,6 +49,6 @@ const styles = StyleSheet.create({
     color: R.colors.gray,
     fontSize: R.fontSizes.icon,
   }
-
 });
+
 export default ScreenListItem;

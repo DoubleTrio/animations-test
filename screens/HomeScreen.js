@@ -2,8 +2,9 @@ import React, { useCallback } from 'react';
 import { Animated, View, StyleSheet, Text, FlatList, ScrollView } from 'react-native';
 import R from '../styles/index';
 import ScreenListItem from '../components/presentational/ScreenListItem';
-import * as navigate from 'react-navigation-hooks';
-const { useNavigation } = navigate;
+// import * as navigate from 'react-navigation-hooks';
+// console.log(navigate)
+
 const routeNames = [
   {
     routeName: 'MovementScreen',
@@ -14,18 +15,19 @@ const routeNames = [
   {
     routeName: 'OpacityScreen',
     title: 'Opacity',
-    subText: 'Adjusting opacity of text',
+    subText: 'Adjust the opacity of text',
     id: '2'
   },
-  // {
-  //   route: 'MovementScreen',
-  //   title: 'Animating Views',
-  //   id: '1' 
-  // },
+  {
+    routeName: 'ScaleScreen',
+    title: 'Scaling',
+    subText: 'Scale the height and width',
+    id: '3'
+  },
 ]
 
-export default function HomeScreen() {
-  const { navigate } = useNavigation();
+export default function HomeScreen({ navigation }) {
+  const { navigate } = navigation;
   const renderItemCall = useCallback(({ item, index }) => renderItem({ item }, navigate))
   return (
     <ScrollView style={styles.container}>
@@ -73,8 +75,9 @@ const styles = StyleSheet.create({
   },
 
   itemSeperator: {
-    backgroundColor: R.colors.seperator,
-    height: R.border,
+    borderTopColor: R.colors.gray,
+    height: 0,
+    borderTopWidth: 1,
     width: '100%',
   },
 });

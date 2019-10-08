@@ -8,7 +8,6 @@ const R = {
   ...Fonts,
   ...FontSizes,
   ...Spacings,
-  border: moderateScale(1),
 }
 
 export default R;
