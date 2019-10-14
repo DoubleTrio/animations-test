@@ -10,6 +10,9 @@ import HomeScreen from './screens/HomeScreen';
 import MovementScreen from './screens/MovementScreen';
 import OpacityScreen from './screens/OpacityScreen';
 import ScaleScreen from './screens/ScaleScreen';
+import GradientScreen from './screens/GradientScreen';
+import SwitchScreen from './screens/SwitchScreen';
+
 import { AppLoading } from 'expo';
 
 const AppContainer = createAppContainer(createStackNavigator(
@@ -18,6 +21,8 @@ const AppContainer = createAppContainer(createStackNavigator(
     MovementScreen,
     OpacityScreen,
     ScaleScreen,
+    GradientScreen,
+    SwitchScreen,
   },
   {
     initialRouteName: 'HomeScreen',

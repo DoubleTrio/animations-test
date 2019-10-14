@@ -22,7 +22,19 @@ const routeNames = [
     routeName: 'ScaleScreen',
     title: 'Scaling',
     subText: 'Scale the height and width',
-    id: '3'
+    id: '3',
+  },
+  {
+    routeName: 'GradientScreen',
+    title: 'Gradient',
+    subText: 'Animating colors',
+    id: '4',
+  },
+  {
+    routeName: 'SwitchScreen',
+    title: 'Switch Button',
+    subText: 'Toggling on and off an animated button',
+    id: '5',
   },
 ]
 

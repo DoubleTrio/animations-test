@@ -1,29 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { Animated, View, StyleSheet, Text } from 'react-native';
 import R from '../styles/index';
+import { moderateScale } from '../styles/scale';
+import usePulse from '../hooks/pulse';
 import TopPaddingWrapper from '../components/presentational/TopPaddingWrapper';
 
-usePulse = (nextVal = 1.2, lastVal = 0.8, duration = 500) => {
-  const scale = useRef(new Animated.Value(1)).current;
-
-  const pulse = () => {
-    Animated.sequence([
-      Animated.timing(scale, {
-        toValue: nextVal,
-        duration,
-      }),
-      Animated.timing(scale, {
-        toValue: lastVal,
-        duration,
-      }),
-    ]).start(() => pulse());
-  }
-  useEffect(() => {
-    pulse();
-  }, [])
-
-  return scale;
-}
 
 export default function ScaleScreen({ navigation }) {
 
@@ -66,7 +47,7 @@ const styles = StyleSheet.create({
   },
 
   box: {
-    width: 100, 
+    width: moderateScale(100), 
     aspectRatio: 1, 
   }
 });
