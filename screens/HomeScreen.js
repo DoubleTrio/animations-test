@@ -44,12 +44,8 @@ export default function HomeScreen({ navigation }) {
 
 HomeScreen.navigationOptions = {
   headerTitle: 'React Animations',
-  headerTitleStyle: {
-    fontSize: R.fontSizes.header,
-  },
-  headerTintColor: R.colors.light,
   headerStyle: {
-    backgroundColor: R.colors.primary
+    backgroundColor: R.colors.primary,
   },
 };
 

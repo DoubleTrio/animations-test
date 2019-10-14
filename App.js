@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import * as Font from 'expo-font';
 // import { Asset } from 'expo-asset';
 import store from './redux/store';
+import R from './styles/index';
 import HomeScreen from './screens/HomeScreen';
 import MovementScreen from './screens/MovementScreen';
 import OpacityScreen from './screens/OpacityScreen';
@@ -20,7 +21,16 @@ const AppContainer = createAppContainer(createStackNavigator(
   },
   {
     initialRouteName: 'HomeScreen',
-    headerLayoutPreset: 'center',
+    defaultNavigationOptions: {
+      headerTitleStyle: {
+        fontSize: R.fontSizes.header,
+      },
+      headerTintColor: R.colors.light,
+      headerStyle: {
+        backgroundColor: R.colors.primaryBlue,
+      },
+      headerTitle: 'Go Back',
+    },
   },
 ));
 
@@ -31,7 +41,7 @@ export default function App() {
       <AppLoading 
         startAsync={loadResourcesAsync}
         onError={handleError}
-        onFinish={setLoadingComplete(true)}   
+        onFinish={() => setLoadingComplete(true)}   
       />
     );
   } else {

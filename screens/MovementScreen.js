@@ -1,66 +1,77 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Animated, View, StyleSheet, Text } from 'react-native';
+import { Animated, View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Square from '../components/presentational/Square';
 import R from '../styles/index';
 import Row from '../components/presentational/Row';
+import TopPaddingWrapper from '../components/presentational/TopPaddingWrapper';
+import MainText from '../components/presentational/MainText';
 
 export default function MovementScreen({ navigation }) {
   const { goBack } = navigation;
-  const upValue = new Animated.Value(0)
-  const leftValue = new Animated.Value(0);
-  const [isHidden, setHidden] = useState(true)
-
+  const leftValue = useRef(new Animated.Value(0)).current;
+  const upValue = useRef(new Animated.Value(0)).current;
+  const [isInitialPos, setPos] = useState(true);
+  
   const _start = () => {
-    Animated.parallel([
-      Animated.timing(upValue, {
-        toValue: 1,
+    Animated.sequence([
+      Animated.timing(leftValue, {
+        toValue: isInitialPos ? 1 : 0,
         duration: 2000,
         useNativeDriver: true,
       }),
-      Animated.timing(leftValue, {
-        toValue: 1,
+      Animated.timing(upValue, {
+        toValue: isInitialPos ? 1 : 0,
         duration: 2000,
         useNativeDriver: true,
       }),
     ]).start();
+    setPos(!isInitialPos)
   }
   
   return (
-    <View style={styles.container}>
-      <Text onPress={_start}>MovementScreen</Text>
-      <Animated.View style={[ 
-        styles.row, {
-        transform: [
-          {
-            translateY: upValue.interpolate({
-              inputRange: [0, 1],
-              outputRange: [100, 0]
-            }),
-          }
-        ]
-      }
-      ]}>
-        <Square size={100} color={R.colors.blue}/>
-        <Square size={100} color={R.colors.green}/>
-      </Animated.View>
-      <Animated.View style={[ 
-        styles.row, {
-        transform: [
-          {
-            translateX: leftValue.interpolate({
-              inputRange: [0, 1],
-              outputRange: [100, 0]
-            }),
-          }
-        ]
-      }
-      ]}>
-        <Square size={100} color={R.colors.purple}/>
-        <Square size={100} color={R.colors.yellow}/>
-      </Animated.View>
-    </View>
+    <TopPaddingWrapper>
+      <View style={styles.container}>
+        <TouchableOpacity activeOpacity={0.5} onPress={_start}>
+          <MainText style={styles.startText}>Toggle Squares</MainText>
+        </TouchableOpacity>
+        <Animated.View style={[ 
+          styles.row, {
+          transform: [
+            {
+              translateX: leftValue.interpolate({
+                inputRange: [0, 1],
+                outputRange: [500, 0]
+              }),
+            }
+          ]
+        }
+        ]}>
+          <Square size={100} color={R.colors.blue}/>
+          <Square size={100} color={R.colors.green}/>
+        </Animated.View>
+        <Animated.View style={[ 
+          styles.row, {
+          transform: [
+            {
+              translateY: upValue.interpolate({
+                inputRange: [0, 1],
+                outputRange: [1000, 0]
+              }),
+            }
+          ]
+        }
+        ]}>
+          <Square size={150} color={R.colors.purple}/>
+          <Square size={200} color={R.colors.yellow}/>
+        </Animated.View>
+      </View>
+    </TopPaddingWrapper>
   );
 }
+
+// MovementScreen.navigationOptions = {
+//   headerTitle: 'Back',
+// }
 
 const styles = StyleSheet.create({
   container: {
@@ -70,5 +81,11 @@ const styles = StyleSheet.create({
 
   row: {
     flexDirection: 'row',
+  },
+
+  startText: {
+    // fontFamily: R.fonts.normal,
+    fontSize: R.fontSizes.xl,
+    fontFamily: R.fonts.normal,
   }
 });
