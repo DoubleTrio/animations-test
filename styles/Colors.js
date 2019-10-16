@@ -9,6 +9,8 @@ const Colors = {
     blue: '#A9DEF9',
     green: '#D0F4DE',
     purple: '#E4C1F9',
+    black: '#000',
+    darkMode: '#2C2F33',
   },
 };
 

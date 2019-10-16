@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, createContext } from 'react';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import { Provider } from 'react-redux'
@@ -12,10 +12,10 @@ import OpacityScreen from './screens/OpacityScreen';
 import ScaleScreen from './screens/ScaleScreen';
 import GradientScreen from './screens/GradientScreen';
 import SwitchScreen from './screens/SwitchScreen';
-
 import { AppLoading } from 'expo';
+import { AppContext } from './context/theme';
 
-const AppContainer = createAppContainer(createStackNavigator(
+const Stack = createStackNavigator(
   {
     HomeScreen,
     MovementScreen,
@@ -37,10 +37,12 @@ const AppContainer = createAppContainer(createStackNavigator(
       headerTitle: 'Go Back',
     },
   },
-));
+);
+
+const AppContainer = createAppContainer(Stack);
 
 export default function App() {
-  const [isLoadingComplete, setLoadingComplete] = useState(false);
+  [isLoadingComplete, setLoadingComplete] = useState(false)
   if (!isLoadingComplete) {
     return (
       <AppLoading 
@@ -52,7 +54,9 @@ export default function App() {
   } else {
     return (
       <Provider store={store}>
-        <AppContainer />
+        <AppContext>
+          <AppContainer />
+        </AppContext>
       </Provider>
     );
   }

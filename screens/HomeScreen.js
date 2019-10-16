@@ -1,7 +1,8 @@
-import React, { useCallback } from 'react';
-import { Animated, View, StyleSheet, Text, FlatList, ScrollView } from 'react-native';
+import React, { useCallback, useContext } from 'react';
+import { Animated, View, StyleSheet, Text, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import R from '../styles/index';
 import ScreenListItem from '../components/presentational/ScreenListItem';
+import { withThemeContext } from '../context/theme';
 // import * as navigate from 'react-navigation-hooks';
 // console.log(navigate)
 
@@ -38,11 +39,13 @@ const routeNames = [
   },
 ]
 
-export default function HomeScreen({ navigation }) {
+function Screen({ navigation, theme }) {
   const { navigate } = navigation;
   const renderItemCall = useCallback(({ item, index }) => renderItem({ item }, navigate))
+  console.log(theme)
   return (
     <ScrollView style={styles.container}>
+      <TouchableOpacity style={{width: 40, aspectRatio: 1, color: R.colors.green, borderRadius: 50, borderWidth: 1, position: 'absolute', bottom: 0}} onPress={theme.changeTheme} />
       <FlatList 
         data={routeNames}
         renderItem={renderItemCall}
@@ -53,6 +56,8 @@ export default function HomeScreen({ navigation }) {
     </ScrollView>
   );
 }
+
+const HomeScreen = withThemeContext(Screen);
 
 HomeScreen.navigationOptions = {
   headerTitle: 'React Animations',
@@ -80,6 +85,8 @@ const ItemSeperator = () => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    // height: '100%',
+    // width: '100%'
   },
 
   itemSeperator: {
@@ -89,3 +96,5 @@ const styles = StyleSheet.create({
     width: '100%',
   },
 });
+
+export default HomeScreen;

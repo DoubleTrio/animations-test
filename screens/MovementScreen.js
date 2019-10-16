@@ -69,9 +69,12 @@ export default function MovementScreen({ navigation }) {
   );
 }
 
-// MovementScreen.navigationOptions = {
-//   headerTitle: 'Back',
-// }
+MovementScreen.navigationOptions = {
+  headerTitle: 'Go Back',
+  headerStyle: {
+    backgroundColor: R.colors.primaryBlue,
+  },
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -84,8 +87,7 @@ const styles = StyleSheet.create({
   },
 
   startText: {
-    // fontFamily: R.fonts.normal,
-    fontSize: R.fontSizes.xl,
     fontFamily: R.fonts.normal,
+    fontSize: R.fontSizes.xl,
   }
 });
