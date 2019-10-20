@@ -5,8 +5,9 @@ import R from '../styles/index';
 import Row from '../components/presentational/Row';
 import TopPaddingWrapper from '../components/presentational/TopPaddingWrapper';
 import MainText from '../components/presentational/MainText';
+import withThemeContext from '../context/ThemeContext/theme';
 
-export default function MovementScreen({ navigation }) {
+function MovementScreen({ navigation, theme }) {
   const { goBack } = navigation;
   const leftValue = useRef(new Animated.Value(0)).current;
   const upValue = useRef(new Animated.Value(0)).current;
@@ -29,8 +30,10 @@ export default function MovementScreen({ navigation }) {
   }
   
   return (
-    <TopPaddingWrapper>
-      <View style={styles.container}>
+      <View style={[styles.container, {
+        backgroundColor: theme.palette.primary,
+      }
+      ]}>
         <TouchableOpacity activeOpacity={0.5} onPress={_start}>
           <MainText style={styles.startText}>Toggle Squares</MainText>
         </TouchableOpacity>
@@ -65,7 +68,6 @@ export default function MovementScreen({ navigation }) {
           <Square size={200} color={R.colors.yellow}/>
         </Animated.View>
       </View>
-    </TopPaddingWrapper>
   );
 }
 
@@ -79,6 +81,7 @@ MovementScreen.navigationOptions = {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
+    justifyContent: 'center',
     flex: 1,
   },
 
@@ -87,7 +90,8 @@ const styles = StyleSheet.create({
   },
 
   startText: {
-    fontFamily: R.fonts.normal,
     fontSize: R.fontSizes.xl,
   }
 });
+
+export default withThemeContext(MovementScreen);

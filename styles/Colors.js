@@ -11,6 +11,7 @@ const Colors = {
     purple: '#E4C1F9',
     black: '#000',
     darkMode: '#2C2F33',
+    lightMode: '#F9F9F9',
   },
 };
 

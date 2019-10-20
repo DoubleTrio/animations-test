@@ -1,8 +1,10 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useRef } from 'react';
 import { Animated, View, StyleSheet, Text, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import R from '../styles/index';
 import ScreenListItem from '../components/presentational/ScreenListItem';
-import { withThemeContext } from '../context/theme';
+import withThemeContext from '../context/ThemeContext/theme';
+import ThemeButton from '../components/presentational/ThemeButton';
+import PropTypes from 'prop-types';
 // import * as navigate from 'react-navigation-hooks';
 // console.log(navigate)
 
@@ -37,28 +39,70 @@ const routeNames = [
     subText: 'Toggling on and off an animated button',
     id: '5',
   },
+  {
+    routeName: 'SwitchScreen',
+    title: 'Switch Button',
+    subText: 'Toggling on and off an animated button',
+    id: '6',
+  },
+  {
+    routeName: 'SwitchScreen',
+    title: 'Switch Button',
+    subText: 'Toggling on and off an animated button',
+    id: '7',
+  },
+  {
+    routeName: 'SwitchScreen',
+    title: 'Switch Button',
+    subText: 'Toggling on and off an animated button',
+    id: '8',
+  },
+  {
+    routeName: 'SwitchScreen',
+    title: 'Switch Button',
+    subText: 'Toggling on and off an animated button',
+    id: '9',
+  },
 ]
 
 function Screen({ navigation, theme }) {
+
   const { navigate } = navigation;
+  const { primary } = theme; 
   const renderItemCall = useCallback(({ item, index }) => renderItem({ item }, navigate))
-  console.log(theme)
+
   return (
-    <ScrollView style={styles.container}>
-      <TouchableOpacity style={{width: 40, aspectRatio: 1, color: R.colors.green, borderRadius: 50, borderWidth: 1, position: 'absolute', bottom: 0}} onPress={theme.changeTheme} />
-      <FlatList 
-        data={routeNames}
-        renderItem={renderItemCall}
-        keyExtractor={item => item.id}
-        ItemSeparatorComponent={ItemSeperator}
-        showsVerticalScrollIndicator={false}
-      />
-    </ScrollView>
+    <Animated.View style={[styles.container, { backgroundColor: primary }]}>
+      <ScrollView style={styles.container}>      
+        <FlatList 
+          data={routeNames}
+          renderItem={renderItemCall}
+          keyExtractor={item => item.id}
+          ItemSeparatorComponent={ItemSeperator}
+          showsVerticalScrollIndicator={false}
+        />
+      </ScrollView>
+      <ThemeButton />
+    </Animated.View>
   );
 }
 
 const HomeScreen = withThemeContext(Screen);
 
+HomeScreen.propTypes = {
+  theme: PropTypes.shape({
+    changeTheme: PropTypes.func.isRequired,
+    isLightTheme: PropTypes.bool.isRequired,
+    palette: PropTypes.shape({
+      gray: PropTypes.string.isRequired,
+      primary: PropTypes.string,
+      primaryOpp: PropTypes.string,
+      secondary: PropTypes.string,
+      secondaryOpp: PropTypes.string,
+    }),
+  }),
+  navigation: PropTypes.object,
+}
 HomeScreen.navigationOptions = {
   headerTitle: 'React Animations',
   headerStyle: {

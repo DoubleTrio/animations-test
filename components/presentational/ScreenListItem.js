@@ -8,7 +8,11 @@ import SubText from './SubText';
 
 const ScreenListItem = ({ navigateToScreen, routeName, title, subText }) => {  
   return (
-    <TouchableOpacity style={styles.container} onPress={() => navigateToScreen(routeName, { title })}>
+    <TouchableOpacity 
+      style={styles.container} 
+      onPress={() => navigateToScreen(routeName, { title })}
+      activeOpacity={0.6}
+    >
       <View>
         <TitleText>{title}</TitleText>
         <SubText>{subText}</SubText>

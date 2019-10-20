@@ -3,7 +3,6 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import { Provider } from 'react-redux'
 import * as Font from 'expo-font';
-// import { Asset } from 'expo-asset';
 import store from './redux/store';
 import R from './styles/index';
 import HomeScreen from './screens/HomeScreen';
@@ -13,7 +12,7 @@ import ScaleScreen from './screens/ScaleScreen';
 import GradientScreen from './screens/GradientScreen';
 import SwitchScreen from './screens/SwitchScreen';
 import { AppLoading } from 'expo';
-import { AppContext } from './context/theme';
+import AppContext from './context/ThemeContext/provider';
 
 const Stack = createStackNavigator(
   {

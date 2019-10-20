@@ -9,10 +9,12 @@ const usePulse = (nextVal = 1.2, lastVal = 0.8, duration = 500) => {
       Animated.timing(scale, {
         toValue: nextVal,
         duration,
+        useNativeDriver: true,
       }),
       Animated.timing(scale, {
         toValue: lastVal,
         duration,
+        useNativeDriver: true,
       }),
     ]).start(() => pulse());
   }
